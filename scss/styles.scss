@@ -1,0 +1,161 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  p, label{
+    font-size: 1.1rem;
+  }
+}
+
+body{
+  background-image: url("../imgs/background\ \(2\).jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.cMain{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+
+  img{
+    width: 200px;
+    margin: 2.5rem 0;
+  }
+
+  .secMain{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+
+    .divForm{
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff7a;
+      border-radius: 10px;
+      padding: 5px;
+
+      .title{
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .cForm{
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        flex-direction: column;
+        gap: 10px;
+
+        span{
+          display: flex;
+          flex-direction: row;
+          gap: 5px;
+
+
+          input{
+            width: auto;
+            border: none;
+            border-radius: 5px;
+            flex-grow: 1;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+            padding: 3px;
+
+            &::placeholder{
+              color: darkgrey;
+            }
+          }
+        }
+
+        .btnSub{
+          float: left;
+          width: 60px;
+          background-color: #05A014;
+          border: 1px solid #05A014;
+          border-radius: 5px;
+          color: #fff;
+          padding: 5px;
+          transition: .3s;
+          cursor: pointer;
+
+          &:hover{
+            color: #05A014;
+            background-color: #fff;
+          }
+        }
+
+        .divAnt{
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+      
+    }
+
+    .cResult{
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      text-align: center;
+
+      .resulInfos{
+        color: #05A014;
+      }
+
+      span{
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+
+      .btnGer{
+        float: left;
+        width: 60px;
+        background-color: #7D7D7D;
+        border: 1px solid #7D7D7D;
+        border-radius: 5px;
+        color: #ffffff;
+        padding: 5px;
+        transition: .3s;
+        cursor: pointer;
+
+        &:hover{
+          color: #7D7D7D;
+          background-color: #fff;
+        }
+      }
+
+    }
+
+    .resultClor{
+      display: none;
+    }
+
+    .resultAnt{
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .cMain{
+    .secMain{
+      flex-direction: row;
+      justify-content: center;
+
+      .cForm{
+        width: 350px;
+      }
+    }
+  }
+}
