@@ -6,6 +6,7 @@ const resulBan = document.querySelector('.resulBan');
 const resulBarrPen = document.querySelector('.resulBarrPen');
 const resulBarrVisc = document.querySelector('.resulBarrVisc');
 const resulObs = document.querySelector('.resulObs');
+const inputClor = [...document.querySelectorAll('.inputClor')];
 
 const formAnt = document.querySelector('.formAnt');
 const gerAnt = document.querySelector('.gerAnt');
@@ -13,6 +14,18 @@ const resultAnt = document.querySelector('.resultAnt');
 const resulLazox = document.querySelector('.resulLazox');
 const resulSalm = document.querySelector('.resulSalm');
 const resulLazAcid = document.querySelector('.resulLazAcid');
+
+// mascara dos inputs do cloro
+inputClor.forEach(item => {
+  item.addEventListener('keypress', () => {
+    let inputLength = item.value.length
+
+    if (inputLength === 1) {
+      item.value += "."
+    }
+  
+  })
+})
 
 // cloro
 // se o localStorage não existir, gera 1
@@ -120,9 +133,9 @@ const updateDom = () => {
   resulBarrVisc.textContent = `Barreira Víscera: ${dataBaseClorLS.barrVisc}`;
   resulObs.textContent = `Obs.: ${dataBaseClorLS.obs}`;
 
-  resulLazox.textContent = `Lazox MC: ${dataBaseAntLS.lazMC} lt`;
-  resulSalm.textContent = `Salmolaz: ${dataBaseAntLS.salm} lt`;
-  resulLazAcid.textContent = `Laz Acid: ${dataBaseAntLS.lazAcid} lt`;
+  resulLazox.textContent = `Lazox MC: ${dataBaseAntLS.lazMC} L`;
+  resulSalm.textContent = `Salmolaz: ${dataBaseAntLS.salm} L`;
+  resulLazAcid.textContent = `Laz Acid: ${dataBaseAntLS.lazAcid} L`;
 
   let nonconformityClor = "";
 
