@@ -141,28 +141,52 @@ const updateDom = () => {
 
   if ((dataBaseClorLS.refeitorio < 0.20) || (dataBaseClorLS.refeitorio > 2)) {
     resulref.style.color = "red";
-    nonconformityClor += "%0A-Refeitório fora do padrão";
+
+    if (dataBaseClorLS.refeitorio < 0.20) {
+      nonconformityClor += "%0A-Refeitório abaixo do padrão";
+    } else if (dataBaseClorLS.refeitorio > 2) {
+      nonconformityClor += "%0A-Refeitório acima do padrão";
+    };
+    
   } else {
     resulref.style.color = "green";
   };
 
   if ((dataBaseClorLS.banheiro < 0.20) || (dataBaseClorLS.banheiro > 2)) {
     resulBan.style.color = "red";
-    nonconformityClor += "%0A-Banheiro fora do padrão";
+
+    if (dataBaseClorLS.banheiro < 0.20) {
+      nonconformityClor += "%0A-Banheiro abaixo do padrão";
+    } else if (dataBaseClorLS.banheiro > 2) {
+      nonconformityClor += "%0A-Banheiro acima do padrão";
+    };
+
   } else {
     resulBan.style.color = "green";
   };
 
   if ((dataBaseClorLS.barrPena < 0.20) || (dataBaseClorLS.barrPena > 2)) {
     resulBarrPen.style.color = "red";
-    nonconformityClor += "%0A-Barreira Pena fora do padrão";
+
+    if (dataBaseClorLS.barrPena < 0.20) {
+      nonconformityClor += "%0A-Barreira Pena abaixo do padrão";
+    } else if (dataBaseClorLS.barrPena > 2) {
+      nonconformityClor += "%0A-Barreira Pena acima do padrão";
+    };
+
   } else {
     resulBarrPen.style.color = "green";
   };
 
   if ((dataBaseClorLS.barrVisc < 0.20) || (dataBaseClorLS.barrVisc > 2)) {
     resulBarrVisc.style.color = "red";
-    nonconformityClor += "%0A-Barreira Víscera fora do padrão";
+
+    if (dataBaseClorLS.barrVisc < 0.20) {
+      nonconformityClor += "%0A-Barreira Víscera abaixo do padrão";
+    } else if (dataBaseClorLS.barrVisc > 2) {
+      nonconformityClor += "%0A-Barreira Víscera acima do padrão";
+    };
+
   } else {
     resulBarrVisc.style.color = "green";
   };
