@@ -38,16 +38,28 @@
             <input type="tel" name="barrVis" id="barrVis" step="0.01" placeholder="0.00" class="inputClor" maxlength="4" required>
           </span>
 
+          <span class="aguaBruta">
+            <label>Água Bruta:</label>
+            
+            <div>
+              <input type="radio" name="aguaBruta" id="off" value="Desligada" checked>
+              <label for="off">Desligada</label>
+
+              <input type="radio" name="aguaBruta" id="on" value="Ligada">
+              <label for="on">Ligada</label>
+            </div>
+          </span>
+
           <span>
             <label for="obs">Obs:</label>
-            <input type="text" name="obs" id="obs" required>
+            <input type="text" name="obs" id="obs">
           </span>
 
           <button type="submit" class="btnSub btnClor">Salvar</button>
         </form>
 
         <div class="cResult resultClor">
-          <h3 class="subTitle">Resultado</h3>
+          <h3 class="subTitle">Resultado dia <span class="dateResul"></span></h3>
           <span class="resulref resulInfos"></span>
           <span class="resulBan resulInfos"></span>
           <span class="resulBarrPen resulInfos"></span>
@@ -60,7 +72,7 @@
       </div>
 
       <div class="divForm divAnt">
-        <h2 class="title">Nível dos antioxidantes e<br>anti-salmonella</h2>
+        <h2 class="title">Nível dos Químicos</h2>
 
         <form class="cForm formAnt">
           <span>
@@ -80,7 +92,7 @@
         </form>
 
         <div class="cResult resultAnt">
-          <h3 class="subTitle">Resultado</h3>
+          <h3 class="subTitle">Resultado dia <span class="dateResul"></span></h3>
           <span class="resulLazox">Lazox MC: 120 L</span>
           <span class="resulSalm">Salmolaz: 680 L</span>
           <span class="resulLazAcid">Laz Acid: 1000 L</span>

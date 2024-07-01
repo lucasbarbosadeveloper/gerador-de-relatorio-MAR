@@ -1,6 +1,7 @@
 const formClor = document.querySelector('.formClor');
 const gerClor = document.querySelector('.gerClor');
 const resultClor = document.querySelector('.resultClor');
+const dateResul = [...document.querySelectorAll('.dateResul')];
 const resulref = document.querySelector('.resulref');
 const resulBan = document.querySelector('.resulBan');
 const resulBarrPen = document.querySelector('.resulBarrPen');
@@ -27,28 +28,42 @@ inputClor.forEach(item => {
   })
 })
 
-// cloro
-// se o localStorage não existir, gera 1
-if (localStorage.getItem('dataBaseClor') === null) {
-  localStorage.setItem('dataBaseClor', JSON.stringify({
+// se o localStorage não existir, gera um localStorage
+if (localStorage.getItem('dataBase') === null) {
+  localStorage.setItem('dataBase', JSON.stringify({
+    data: "",
     refeitorio: 0,
     banheiro: 0,
     barrPena: 0,
     barrVisc: 0,
-    obs: ""
+    obsCloro: [],
+    lazMC: 0,
+    salm: 0,
+    lazAcid: 0
   }));
 };
 
-// obtem os dados do LS e converte para obj
-let dataBaseClorString = localStorage.getItem('dataBaseClor');
-let dataBaseClorLS = JSON.parse(dataBaseClorString);
+// obtem os dados do localStorage e converte para obj
+let dataBaseString = localStorage.getItem('dataBase');
+let dataBase = JSON.parse(dataBaseString);
 
-// atualiza o LS
+// atualiza o localStorage
 const updateLocalStorage = () => {
-  localStorage.setItem('dataBaseClor', JSON.stringify(dataBaseClorLS));
+  localStorage.setItem('dataBase', JSON.stringify(dataBase));
 };
 
+// gera a data do resultado
+function dateGenerator() {
+  const date = new Date();
 
+  const day = date.getDay().toString().length == 1 ? `0${date.getDay()}` : date.getDay();
+  const month = (date.getMonth() + 1).toString().length == 1 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+  const yaer = date.getFullYear();
+
+  return `${day}/${month}/${yaer}`;
+};
+
+// cloro
 // evento de submit do cloro
 formClor.addEventListener('submit', (ev) => {
   ev.preventDefault();
@@ -58,46 +73,37 @@ formClor.addEventListener('submit', (ev) => {
   if (valid === true) {
     const formData = new FormData(formClor);
   
-    dataBaseClorLS.refeitorio = Number(formData.get('ref'));
-    dataBaseClorLS.banheiro = Number(formData.get('ban'));
-    dataBaseClorLS.barrPena = Number(formData.get('barrPena'));
-    dataBaseClorLS.barrVisc = Number(formData.get('barrVis'));
-    dataBaseClorLS.obs = formData.get('obs');
-    
-    resultClor.style.display = "flex";
+    dataBase.data = dateGenerator();
+    dataBase.refeitorio = Number(formData.get('ref')).toFixed(2);
+    dataBase.banheiro = Number(formData.get('ban')).toFixed(2);
+    dataBase.barrPena = Number(formData.get('barrPena')).toFixed(2);
+    dataBase.barrVisc = Number(formData.get('barrVis')).toFixed(2);
+    if (document.querySelector('#off').checked) {
+      dataBase.obsCloro = [];
+      dataBase.obsCloro.push("Água Bruta Desligada");
+    } else {
+      dataBase.obsCloro = [];
+      dataBase.obsCloro.push("Água Bruta Ligada");
+    };
 
+    if (formData.get('obs').length > 0) {
+      dataBase.obsCloro.push(formData.get('obs'));
+    };
+    
     updateLocalStorage();
     updateDom();
   }
   
 });
 
-
-// evento que envia a mensagem
+// evento que envia a mensagem do resultado do cloro
 gerClor.addEventListener('click', (ev) => {
-  let mensage = `*Cloração da água*%0ARefeitório: ${dataBaseClorLS.refeitorio}%0ABanheiro: ${dataBaseClorLS.banheiro}%0ABarreira Pena: ${dataBaseClorLS.barrPena}%0ABarreira Víscera: ${dataBaseClorLS.barrVisc}%0A%0A-${dataBaseClorLS.obs}${updateDom()}`;
+  let mensage = `*Cloração da água*%0ARefeitório: ${dataBase.refeitorio}%0ABanheiro: ${dataBase.banheiro}%0ABarreira Pena: ${dataBase.barrPena}%0ABarreira Víscera: ${dataBase.barrVisc}%0A%0A-${dataBase.obsCloro}${updateDom()}`;
 
-  window.open(`https://wa.me/5585987692718?text=${mensage}`)
+  window.open(`https://wa.me/5585987692718?text=${mensage}`);
 });
 
-
-
 // antioxidante
-if (localStorage.getItem('dataBaseAnt') === null) {
-  localStorage.setItem('dataBaseAnt', JSON.stringify({
-    lazMC: 0,
-    salm: 0,
-    lazAcid: 0
-  }));
-};
-
-let dataBaseAntString = localStorage.getItem('dataBaseAnt');
-let dataBaseAntLS = JSON.parse(dataBaseAntString);
-
-const updateLocalStorageAnt = () => {
-  localStorage.setItem('dataBaseAnt', JSON.stringify(dataBaseAntLS));
-};
-
 formAnt.addEventListener('submit', (ev) => {
   ev.preventDefault();
 
@@ -106,45 +112,49 @@ formAnt.addEventListener('submit', (ev) => {
   if (valid === true) {
     const formData = new FormData(formAnt);
   
-    dataBaseAntLS.lazMC = Number(formData.get('lazMC'));
-    dataBaseAntLS.salm = Number(formData.get('salm'));
-    dataBaseAntLS.lazAcid = Number(formData.get('lazAcid'));
+    dataBase.lazMC = Number(formData.get('lazMC'));
+    dataBase.salm = Number(formData.get('salm'));
+    dataBase.lazAcid = Number(formData.get('lazAcid'));
 
     resultAnt.style.display = "flex";
   
-    updateLocalStorageAnt();
+    updateLocalStorage();
     updateDom();
   };
 
 });
 
+// evento que envia a mensagem do resultado dos antioxidantes
 gerAnt.addEventListener('click', (ev) => {
-  let mensage = `*Nível dos antioxidantes/anti-salmonella*%0ALazox MC: ${dataBaseAntLS.lazMC} L%0ASalmolaz: ${dataBaseAntLS.salm} L%0ALaz Acid: ${dataBaseAntLS.lazAcid} L`;
+  let mensage = `*Nível dos antioxidantes/anti-salmonella*%0ALazox MC: ${dataBase.lazMC} L%0ASalmolaz: ${dataBase.salm} L%0ALaz Acid: ${dataBase.lazAcid} L`;
 
-  window.open(`https://wa.me/5585987692718?text=${mensage}`)
+  window.open(`https://wa.me/5585987692718?text=${mensage}`);
 })
 
-
-// atualiza as infos no dom e gera menssagem de não conformidade
+// atualiza as infos no dom e gera menssagem de não conformidade do cloro
 const updateDom = () => {
-  resulref.textContent = `Refeitório: ${dataBaseClorLS.refeitorio}`;
-  resulBan.textContent = `Banheiro: ${dataBaseClorLS.banheiro}`;
-  resulBarrPen.textContent = `Barreira Pena: ${dataBaseClorLS.barrPena}`;
-  resulBarrVisc.textContent = `Barreira Víscera: ${dataBaseClorLS.barrVisc}`;
-  resulObs.textContent = `Obs.: ${dataBaseClorLS.obs}`;
+  for (const el of dateResul) {
+    el.textContent = dataBase.data
+  }
+  resulref.textContent = `Refeitório: ${dataBase.refeitorio}`;
+  resulBan.textContent = `Banheiro: ${dataBase.banheiro}`;
+  resulBarrPen.textContent = `Barreira Pena: ${dataBase.barrPena}`;
+  resulBarrVisc.textContent = `Barreira Víscera: ${dataBase.barrVisc}`;
+  resulObs.textContent = `Obs.: ${dataBase.obsCloro}`;
 
-  resulLazox.textContent = `Lazox MC: ${dataBaseAntLS.lazMC} L`;
-  resulSalm.textContent = `Salmolaz: ${dataBaseAntLS.salm} L`;
-  resulLazAcid.textContent = `Laz Acid: ${dataBaseAntLS.lazAcid} L`;
+  resulLazox.textContent = `Lazox MC: ${dataBase.lazMC} L`;
+  resulSalm.textContent = `Salmolaz: ${dataBase.salm} L`;
+  resulLazAcid.textContent = `Laz Acid: ${dataBase.lazAcid} L`;
 
+  // nao conformidade do cloro
   let nonconformityClor = "";
 
-  if ((dataBaseClorLS.refeitorio < 0.20) || (dataBaseClorLS.refeitorio > 2)) {
+  if ((dataBase.refeitorio < 0.20) || (dataBase.refeitorio > 2)) {
     resulref.style.color = "red";
 
-    if (dataBaseClorLS.refeitorio < 0.20) {
+    if (dataBase.refeitorio < 0.20) {
       nonconformityClor += "%0A-Refeitório abaixo do padrão";
-    } else if (dataBaseClorLS.refeitorio > 2) {
+    } else if (dataBase.refeitorio > 2) {
       nonconformityClor += "%0A-Refeitório acima do padrão";
     };
     
@@ -152,12 +162,12 @@ const updateDom = () => {
     resulref.style.color = "green";
   };
 
-  if ((dataBaseClorLS.banheiro < 0.20) || (dataBaseClorLS.banheiro > 2)) {
+  if ((dataBase.banheiro < 0.20) || (dataBase.banheiro > 2)) {
     resulBan.style.color = "red";
 
-    if (dataBaseClorLS.banheiro < 0.20) {
+    if (dataBase.banheiro < 0.20) {
       nonconformityClor += "%0A-Banheiro abaixo do padrão";
-    } else if (dataBaseClorLS.banheiro > 2) {
+    } else if (dataBase.banheiro > 2) {
       nonconformityClor += "%0A-Banheiro acima do padrão";
     };
 
@@ -165,12 +175,12 @@ const updateDom = () => {
     resulBan.style.color = "green";
   };
 
-  if ((dataBaseClorLS.barrPena < 0.20) || (dataBaseClorLS.barrPena > 2)) {
+  if ((dataBase.barrPena < 0.20) || (dataBase.barrPena > 2)) {
     resulBarrPen.style.color = "red";
 
-    if (dataBaseClorLS.barrPena < 0.20) {
+    if (dataBase.barrPena < 0.20) {
       nonconformityClor += "%0A-Barreira Pena abaixo do padrão";
-    } else if (dataBaseClorLS.barrPena > 2) {
+    } else if (dataBase.barrPena > 2) {
       nonconformityClor += "%0A-Barreira Pena acima do padrão";
     };
 
@@ -178,12 +188,12 @@ const updateDom = () => {
     resulBarrPen.style.color = "green";
   };
 
-  if ((dataBaseClorLS.barrVisc < 0.20) || (dataBaseClorLS.barrVisc > 2)) {
+  if ((dataBase.barrVisc < 0.20) || (dataBase.barrVisc > 2)) {
     resulBarrVisc.style.color = "red";
 
-    if (dataBaseClorLS.barrVisc < 0.20) {
+    if (dataBase.barrVisc < 0.20) {
       nonconformityClor += "%0A-Barreira Víscera abaixo do padrão";
-    } else if (dataBaseClorLS.barrVisc > 2) {
+    } else if (dataBase.barrVisc > 2) {
       nonconformityClor += "%0A-Barreira Víscera acima do padrão";
     };
 
