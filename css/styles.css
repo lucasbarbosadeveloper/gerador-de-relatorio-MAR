@@ -154,7 +154,7 @@ footer a {
     flex-direction: row;
     justify-content: center;
   }
-  .cMain .secMain .cForm {
+  .cMain .secMain .divForm {
     width: 350px;
   }
 }
