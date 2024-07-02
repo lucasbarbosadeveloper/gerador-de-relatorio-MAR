@@ -12,6 +12,10 @@ html {
   height: 100%;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   background-image: url("../imgs/background (2).jpg");
   background-repeat: no-repeat;
@@ -25,11 +29,14 @@ body {
 }
 
 .cMain {
+  display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   min-width: 100%;
+  min-width: 100%;
   padding: 10px;
+  flex: 1 1 0;
   flex: 1 1 0;
 }
 .cMain img {
@@ -102,6 +109,7 @@ body {
   gap: 5px;
   text-align: center;
   margin-top: 1rem;
+  margin-top: 1rem;
 }
 .cMain .secMain .cResult .resulInfos {
   color: #05A014;
@@ -129,11 +137,13 @@ body {
 footer {
   width: 100%;
   color: #fff;
-  height: 2rem;
   background-color: rgba(0, 0, 0, 0.3098039216);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+footer p {
+  padding: 0.5rem;
 }
 footer a {
   color: #fff;
@@ -144,15 +154,8 @@ footer a {
     flex-direction: row;
     justify-content: center;
   }
-  .cMain .secMain .divForm {
-    width: 370px;
-  }
-  .cMain .secMain .divAnt {
-    justify-content: space-between;
-  }
-  .cMain .secMain .resultAnt {
-    height: 200px;
-    justify-content: space-between;
+  .cMain .secMain .cForm {
+    width: 350px;
   }
 }
 
