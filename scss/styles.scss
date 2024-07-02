@@ -9,6 +9,10 @@
   }
 }
 
+html{
+  height: 100%;
+}
+
 body{
   background-image: url("../imgs/background\ \(2\).jpg");
   background-repeat: no-repeat;
@@ -17,6 +21,8 @@ body{
   background-attachment: fixed;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .cMain{
@@ -24,8 +30,9 @@ body{
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
+  min-width: 100%;
   padding: 10px;
+  flex: 1 1 0;
 
   img{
     width: 200px;
@@ -108,6 +115,7 @@ body{
       flex-direction: column;
       gap: 5px;
       text-align: center;
+      margin-top: 1rem;
 
       .resulInfos{
         color: #05A014;
@@ -139,14 +147,41 @@ body{
   }
 }
 
+footer{
+  width: 100%;
+  color: #fff;
+  background-color: #0000004f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p{
+    padding: .5rem;
+  }
+
+  a{
+    color: #fff;
+  }
+}
+
 @media (min-width: 768px) {
   .cMain{
     .secMain{
       flex-direction: row;
       justify-content: center;
 
-      .cForm{
-        width: 350px;
+      .divForm{
+        width: 370px;
+      }
+
+      .divAnt{
+        justify-content: space-between;
+
+      }
+      
+      .resultAnt{
+        height: 200px;
+        justify-content: space-between;
       }
     }
   }
