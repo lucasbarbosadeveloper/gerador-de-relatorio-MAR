@@ -13,6 +13,10 @@ html{
   height: 100%;
 }
 
+html{
+  height: 100%;
+}
+
 body{
   background-image: url("../imgs/background\ \(2\).jpg");
   background-repeat: no-repeat;
@@ -31,7 +35,9 @@ body{
   align-items: center;
   width: 100%;
   min-width: 100%;
+  min-width: 100%;
   padding: 10px;
+  flex: 1 1 0;
   flex: 1 1 0;
 
   img{
@@ -116,6 +122,7 @@ body{
       gap: 5px;
       text-align: center;
       margin-top: 1rem;
+      margin-top: 1rem;
 
       .resulInfos{
         color: #05A014;
@@ -170,18 +177,8 @@ footer{
       flex-direction: row;
       justify-content: center;
 
-      .divForm{
-        width: 370px;
-      }
-
-      .divAnt{
-        justify-content: space-between;
-
-      }
-      
-      .resultAnt{
-        height: 200px;
-        justify-content: space-between;
+      .cForm{
+        width: 350px;
       }
     }
   }
