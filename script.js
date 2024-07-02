@@ -126,7 +126,7 @@ formAnt.addEventListener('submit', (ev) => {
 
 // evento que envia a mensagem do resultado dos antioxidantes
 gerAnt.addEventListener('click', (ev) => {
-  let mensage = `*Nível dos antioxidantes/anti-salmonella*%0ALazox MC: ${dataBase.lazMC} L%0ASalmolaz: ${dataBase.salm} L%0ALaz Acid: ${dataBase.lazAcid} L`;
+  let mensage = `*Nível dos Químicos*%0ALazox MC: ${dataBase.lazMC} L%0ASalmolaz: ${dataBase.salm} L%0ALaz Acid: ${dataBase.lazAcid} L`;
 
   window.open(`https://wa.me/5585987692718?text=${mensage}`);
 })
